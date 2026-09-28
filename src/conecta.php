@@ -31,5 +31,5 @@ try {
     exit("Não foi possível conectar ao banco.");
 }
 
-// teste provisorio;
-var_dump($conexao);
+/* // teste provisorio;
+var_dump($conexao); */
