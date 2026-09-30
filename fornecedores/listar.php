@@ -1,4 +1,8 @@
+
 <?php
+// fornecedores/listar.php
+
+// importando o arquivo de funçoes para Fornecedor
 require_once "../src/fornecedor_crud.php";
 
 // Chamando a função (e pasando os dados da conexão), e recebendo/guardando o array com os dados dos fornecedores 
