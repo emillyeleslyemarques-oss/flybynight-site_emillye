@@ -39,7 +39,7 @@ function inserirFornecedor(PDO $conexao, string $nome): void {
 }
 
 // Usada em fornecedores editar.php
-function buscarFornecedorPorID(PDO $conexao, int $id)
+function buscarFornecedorPorID(PDO $conexao, int $id): array
 {
     // Comando SQL (atenção com o uso de parametro nomeado)
     $sql = "SELECT * FROM fornecedores WHERE id = :id";
@@ -57,3 +57,6 @@ function buscarFornecedorPorID(PDO $conexao, int $id)
     // ATENÇÃO: aqui usamos fetch() por se tratar de UM UNICO array (vetor)
     return $consulta->fetch();
 }
+
+// Usada em fonecedores editar.php
+
