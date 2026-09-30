@@ -14,6 +14,22 @@ $id = $_GET['id'];
 $fornecedor = buscarFornecedorPorID($conexao, $id);
 
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    // capturamos o nome digiado no formulario
+    $nome = $_POST['nome'];
+
+    // chamamos a função de UPDATE (passando os dados para ela)
+    atualizarFornecedor($conexao, $id, $nome);
+
+    // redirecionamos para a pagina que mostra todos os fornecedores
+    header('location:listar.php');
+
+    // encerramos qualquer outro processo
+    // SEMPRE use exit apos o redirecionamento com header()
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
