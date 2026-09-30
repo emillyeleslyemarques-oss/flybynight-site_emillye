@@ -59,4 +59,18 @@ function buscarFornecedorPorID(PDO $conexao, int $id): array
 }
 
 // Usada em fonecedores editar.php
+function atualizarFornecedor(PDO $conexao, int $id, string $nome): void
+{
+     //comando SQL
+     $sql = "UPDATE fornecedores SET nome = :nome WHERE id = :id";
+     
+    // preparar comando sql
+    $consulta = $conexao->prepare($sql);
 
+    //atribuir valores aos campos
+    $consulta->bindValue(":nome", $nome);
+    $consulta->bindValue(":id", $id);
+
+    //Executar
+    $consulta->execute(); 
+}
