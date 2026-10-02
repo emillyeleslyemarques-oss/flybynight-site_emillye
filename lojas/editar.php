@@ -39,7 +39,7 @@ if($_SERVER['REQUEST_METHOD']=== 'POST'){
             <input type="hidden" name="id" value="<?= $loja['id'] ?>">
             <div>
                 <label for="nome">Nome:</label>
-                <input value="<?= $loja['id'] ?>"  type="text" name="nome" id="nome" maxlength="100" required>
+                <input value="<?= $loja['nome'] ?>"  type="text" name="nome" id="nome" maxlength="100" required>
             </div>
             <button type="submit">Atualizar</button>
         </form>

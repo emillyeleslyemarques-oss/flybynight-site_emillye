@@ -22,7 +22,7 @@ function inserirFornecedor(PDO $conexao, string $nome): void {
     /* Sobre o recebimento de dados para o comando SQL no PDO, visando minimizar a chance de 
     injeção de codigo SQL nocivo á partir de entradas de dados (no caso, formulario),
     devemos passar no comando SQL "parametros nomeados" (Named Parameters). Esse tipo
-    de pratica permite receber de froma/segura controlada para a consulta Nunca passe os dados de 
+    de pratica permite receber de forma/segura controlada para a consulta Nunca passe os dados de 
     forma direta */
 
     // passo 1: definir os ´parametros nomeados
