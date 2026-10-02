@@ -53,7 +53,7 @@ $fornecedores = buscarFornecedores($conexao);
                          trabalhar. Por isso, criamos um parametro (?id) e aplicamos a ele 
                          o valor dinamico (id ) do fornecedor. -->
                         <a href="editar.php?id=<?= $fornecedor["id"] ?>">Editar</a>
-                        <a href="excluir.phpid=<?= $fornecedor["id"] ?>" class="excluir">Excluir</a>
+                        <a href="excluir.php?id=<?= $fornecedor["id"] ?>" class="excluir">Excluir</a>
                     </td>
                   </tr>
               <?php endforeach; ?>
