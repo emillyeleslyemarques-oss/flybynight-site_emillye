@@ -1,3 +1,27 @@
+<?php
+
+require_once "../src/fornecedor_crud.php";
+require_once "../src/produto_crud.php";
+
+$fornecedores = buscarFornecedores($conexao);
+
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+  //2) capturar dados
+  // OBS: qual o nome de cada campo  
+  $nome = $_POST['nome'];
+  $descricao = $_POST['descricao'];
+  $preco = $_POST['preco'];
+  $quantidade = $_POST['quantidade'];
+  $fornecedor = $_POST['fornecedor'];
+  
+  //3) Chamar a função de inserir e passar dados para ela
+  inserirProduto($conexao, $nome, $descricao, $preco, $quantidade, $fornecedor);
+  
+  // 4) redirecionar para a pagina que mostra os produtos  
+  header("location:listar.php");
+  exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -37,8 +61,12 @@
             <div>
                 <label for="fornecedor">Fornecedor:</label>
                 <select name="fornecedor" id="fornecedor" required>
-                    <option value="">Selecione</option>
-                    <!-- As opções serão preenchidas com os registros do banco de dados. -->
+                    <option value=""></option>
+                    <?php foreach ($fornecedores as $fornecedor):?>
+                      <option value="<?= $fornecedor['id']?>">
+                              <?= $fornecedor['nome']?>
+                      </option>
+                    <?php endforeach?>
                 </select>
             </div>
             <button type="submit">Salvar</button>

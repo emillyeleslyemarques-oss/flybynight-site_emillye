@@ -1,24 +1,85 @@
 <?php
-// src/produto.php
-
+// src/produto_crud.php
+ 
 require_once "conecta.php";
-
-function buscarProdutos(PDO $conexao): array
+ 
+function buscarProdutos(PDO $conexao):array
 {
-    $sql = "SELECT 
-    -- tabela.coluna AS apelido
-    -- especialmente para colunas com o mesmo nome
-    produtos.nome AS produto, 
-    produtos.preco, 
-    fornecedores.nome AS fornecedor
-FROM produtos
-
--- Fazendo a junção (JOIN) entre as tabelas
--- Neste caso, produtos com fornecedores
-INNER JOIN fornecedores
-
--- Definindo a condição de CRUZAMENTO entre as tabelas
-    ON produtos.fornecedor_id = fornecedores.id;";
+    $sql = "SELECT
+              produtos.id,
+              produtos.nome AS nome_produto,
+              produtos.preco,
+              produtos.quantidade,
+              fornecedores.nome AS nome_fornecedor
+            FROM produtos JOIN fornecedores
+            ON fornecedores.id = produtos.fornecedor_id
+            ORDER BY nome_produto";
     $consulta = $conexao->query($sql);
-    return $consulta->fetchAll();
+    return $consulta ->fetchAll();
 }
+ 
+ 
+function inserirProduto
+    (PDO $conexao,
+     string $nome,
+     string $descricao,
+     float $preco,
+     int $quantidade,
+     int $fornecedorId):void
+{
+    $sql = "INSERT INTO produtos(nome,descricao,preco,quantidade,fornecedor_id)
+                VALUES(:nome, :descricao, :preco, :quantidade, :fornecedor_id)";
+ 
+    $consulta = $conexao->prepare($sql);
+    //atribuindo os valores recebidos pela funcao para cada valor nomeado
+    $consulta->bindValue(':nome', $nome);
+    $consulta->bindValue(':descricao', $descricao);
+    $consulta->bindValue(':preco', $preco);
+    $consulta->bindValue(':quantidade', $quantidade);
+    $consulta->bindValue(':fornecedor_id', $fornecedorId);
+ 
+    $consulta->execute();
+}
+
+function buscarProdutoPorId(PDO $conexao, int $id): array
+{
+    $sql = "SELECT * FROM produtos WHERE id = :id";
+    $consulta = $conexao->prepare($sql);
+    $consulta->bindValue(":id", $id);
+    $consulta->execute();
+    return $consulta->fetch();
+}
+
+function atualizarProduto(
+    PDO $conexao,
+    int $id,
+    string $nome,
+    string $descricao,
+    float $preco,
+    int $quantidade,
+    int $fornecedorId
+   ): void
+{
+   $sql = "UPDATE produtos SET 
+             nome = :nome, descricao = :descricao,
+             preco = :preco, quantidade = :quantidade,
+             fornecedor_id = :fornecedor_id
+            WHERE id = :id";
+
+    $consulta = $conexao->prepare($sql);
+    
+    $consulta->bindValue(':nome', $nome);
+    $consulta->bindValue(':descricao', $descricao);
+    $consulta->bindValue(':preco', $preco);
+    $consulta->bindValue(':quantidade', $quantidade);
+    $consulta->bindValue(':fornecedor_id', $fornecedorId);
+    $consulta->bindValue(':id', $id);
+
+    $consulta->execute();
+}
+ 
+ 
+ 
+ 
+ 
+ 

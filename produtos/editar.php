@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar produto - Fly By Night</title>
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
-
+ 
 <body>
     <?php
     $caminhoBase = '../';
@@ -47,5 +47,4 @@
         <a href="listar.php">← Voltar</a>
     </main>
 </body>
-
-</html>
+ 
