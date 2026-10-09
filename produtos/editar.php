@@ -18,12 +18,13 @@ $produto = buscarProdutoPorId($conexao, $id);
 
 //1) detectar o acionamento do formulario de atualização
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+   
     $id = $_POST['id'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $quantidade = $_POST['quantidade'];
-    $fornecedor_id = $_POST['fornecedor_id'];
+    $fornecedor_id = $_POST['fornecedor'];
 
     atualizarProduto($conexao, $id, $nome, $descricao, $preco, $quantidade, $fornecedor_id);
 
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           no caso dos campos input, uso o atributo value.
           No caso do campo textarea, coloque o valor dentro da tag. -->
         <form action="" method="post">
+            <input type="hidden" name="id" value="<?= $produto['id'] ?>">
             <div>
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" maxlength="100" value="<?= $produto['nome'] ?>" required>
@@ -84,6 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     6.2)O fornecedor daquele produto que esta sendo exibido ja DEVE IR SELECIONADO.
                     programe os recursos para isso acontecer.-->
                     <?php foreach ($fornecedores as $fornecedor): ?>
+                        <!-- A condicional abaixo (feita dentro da tag do option)
+                         faz com que o fornecedor do produto que esta sendo editado
+                         ja venha selecionado, a logica geral é:
+                              se o id do fornecedor (que vem de $fornecedor['id']) for o mesmo
+                              do que esta registrado no produto (que vem de ($produto['fornecedor_id']),
+                              entao aplique o atributo "selected". caso contrario nao faça nada -->
                         <option value="<?= $fornecedor['id'] ?>"
                             <?= $fornecedor['id'] == $produto['fornecedor_id'] ? 'selected' : '' ?>>
                             <?= $fornecedor['nome'] ?>
