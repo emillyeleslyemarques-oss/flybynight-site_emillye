@@ -2,8 +2,17 @@
 require_once "conecta.php";
 function buscarLojasProdutos(PDO $conexao): array
 {
-    $sql = "SELECT * FROM lojas_produtos";
-
+   $sql = "SELECT 
+               lojas_produtos.loja_id,
+               lojas_produtos.produto_id,
+               lojas_produtos.estoque,
+               lojas.nome AS lojas,
+               produtos.nome AS produto
+        FROM lojas_produtos
+        INNER JOIN lojas
+        ON lojas_produtos.loja_id = lojas.id
+        INNER JOIN produtos
+        ON lojas_produtos.produto_id = produtos.id";
     $consulta = $conexao->query($sql);
 
     return $consulta->fetchAll();

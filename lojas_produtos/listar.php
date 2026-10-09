@@ -39,8 +39,8 @@ $lojasProdutos = buscarLojasProdutos($conexao);
                 <tbody>
                     <?php foreach ($lojasProdutos as $lojaProduto): ?>
                         <tr>
-                            <td><?= $lojaProduto['loja_id'] ?></td>
-                            <td><?= $lojaProduto['produto_id'] ?></td>
+                            <td><?= $lojaProduto['lojas'] ?></td>
+                            <td><?= $lojaProduto['produto'] ?></td>
                             <td><?= $lojaProduto['estoque'] ?></td>
                              <td>
                             <a href="editar.php?loja_id=<?= $lojaProduto['loja_id'] ?>&produto_id=<?= $lojaProduto['produto_id'] ?>">Editar</a>
@@ -49,9 +49,6 @@ $lojasProdutos = buscarLojasProdutos($conexao);
                         </td>
 
                         </tr>
-
-                        
-
                     <?php endforeach; ?>
                 </tbody>
             </table>
