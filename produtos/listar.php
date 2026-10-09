@@ -31,6 +31,7 @@ $produtos = buscarProdutos($conexao);
                 <caption>Relação de Produtos</caption>
                 <thead>
                     <tr>
+                        <th scope="col">Id</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Preço</th>
                         <th scope="col">Quantidade</th>
