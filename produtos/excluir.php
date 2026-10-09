@@ -1,7 +1,7 @@
 <?php
 
 require_once "../src/produto_crud.php";
-// Fornecedores
+// Produtos
 
 $id = $_GET['id'];
 excluirProduto($conexao, $id);
