@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value=""></option>
                    <?php foreach ($produtos as $produto): ?> 
                     <option value="<?= $produto['id'] ?>"> 
-                        <?= $produto['nome'] ?> </option> 
+                        <?= $produto['nome_produto'] ?> </option> 
                     <?php endforeach; ?>
                 </select>
             </div>

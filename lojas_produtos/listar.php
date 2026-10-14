@@ -2,6 +2,7 @@
 
 require_once "../src/lojas_produto-crud.php";
 
+
 $lojasProdutos = buscarLojasProdutos($conexao);
 ?>
 <!DOCTYPE html>

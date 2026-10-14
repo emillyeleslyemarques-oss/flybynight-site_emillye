@@ -85,7 +85,7 @@ function excluirProduto(PDO $conexao, int $id): void
    $consulta->bindValue(":id", $id);
    $consulta->execute();
 }
- 
+
  
  
  
