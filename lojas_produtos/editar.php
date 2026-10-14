@@ -3,19 +3,33 @@ require_once "../src/lojas_produto-crud.php";
 require_once "../src/lojas_crud.php";
 require_once "../src/produto_crud.php";
 
-$loja_id = $_GET ['loja_id'];
-$produto_id = $_GET ['produto_id'];
+// parametros iniciais (qual registro está sendo editado)
+$loja_id = $_GET['loja_id'];
+$produto_id = $_GET['produto_id'];
 
 $produtos = buscarProdutos($conexao);
 $lojas = buscarLojas($conexao);
 $lojaProduto = buscarLojaProdutoPorIds($conexao, $loja_id, $produto_id);
 
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $loja_id = $_POST ['loja_id'];
-    $produto_id = $_POST ['produto_id'];
-    $estoque = $_POST ['estoque'];
 
-    atualizarLojaProduto($conexao, $loja_id, $produto_id, $estoque);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+    
+    // parametro inicial (qual loja está sendo editada)
+    // $loja_id = $_POST['loja_id'];
+    
+    // parametro inicial (qual produto está sendo editada)
+    // $produto_id = $_POST['produto_id'];
+
+    // Capturando a loja selecionada no formulario
+    $novaLoja = $_POST['loja_id'];
+    
+    // Capturando o produto selecionado no formulario
+    $novoProduto = $_POST['produto_id'];
+
+    $estoque = $_POST['estoque'];
+
+    atualizarLojaProduto($conexao, $loja_id, $produto_id, $novaLoja, $novoProduto, $estoque);
 
     header("location: listar.php");
     exit;
@@ -46,11 +60,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             <div>
                 <label for="loja">Loja:</label>
-                <select name="loja" id="loja" required>
+                <select name="loja_id" id="loja" required>
                     <?php foreach ($lojas as $loja) { ?>
-                    <option value="<?= $loja['id'] ?>"
+                <option value="<?= $loja['id'] ?>"
                     <?= $loja['id'] == $lojaProduto['loja_id']? 'selected': ''?>>
-                    <?=$loja['nome']  ?></option>
+                    <?=$loja['nome'] ?>
+                </option>
                     <?php } ?>
                     <!-- As opções serão preenchidas com os registros do banco de dados. -->
                 </select>
@@ -58,7 +73,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             <div>
                 <label for="produto">Produto:</label>
-                <select name="produto" id="produto" required>
+                <select name="produto_id" id="produto" required>
                      <?php foreach ($produtos as $produto) { ?>
             <option value="<?= $produto['id'] ?>"
                 <?= $produto['id'] == $lojaProduto['produto_id'] ? 'selected' : '' ?>>

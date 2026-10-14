@@ -39,13 +39,23 @@ function buscarLojaProdutoPorIds(PDO $conexao, int $loja_id, int $produto_id): a
     return $consulta->fetch();
 }
 
-function atualizarLojaProduto(PDO $conexao, int $loja_id, int $produto_id, int $estoque): void
+function atualizarLojaProduto(PDO $conexao, int $loja_id, int $produto_id, int $novaLoja, int $novoProduto, int $estoque): void
 {
-    $sql = "UPDATE lojas_produtos SET estoque = :estoque WHERE loja_id = :loja_id AND produto_id = :produto_id";
+    $sql = "UPDATE lojas_produtos
+            SET estoque = :estoque, loja_id = :nova_loja, produto_id = :novo_produto
+            WHERE loja_id = :loja_id AND produto_id = :produto_id";
+
     $consulta = $conexao->prepare($sql);
+
+    // possiveis novos valores
     $consulta->bindValue(":estoque", $estoque);
+    $consulta->bindValue(":nova_loja", $novaLoja);
+    $consulta->bindValue(":novo_produto", $novoProduto);
+
+    // quem está sendo editado 
     $consulta->bindValue(":loja_id", $loja_id);
     $consulta->bindValue(":produto_id", $produto_id);
+    
     $consulta->execute();
 }
  function excluirLojaProduto(PDO $conexao, int $loja_id, int $produto_id): void
