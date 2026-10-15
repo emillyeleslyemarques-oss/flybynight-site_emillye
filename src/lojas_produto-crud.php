@@ -54,7 +54,7 @@ function atualizarLojaProduto(PDO $conexao, int $loja_id, int $produto_id, int $
 
     // quem está sendo editado 
     $consulta->bindValue(":loja_id", $loja_id);
-    $consulta->bindValue(":produto_id", $produto_id);
+    $consulta->bindValue(":produto_id", $produto_id); 
     
     $consulta->execute();
 }
@@ -66,3 +66,4 @@ function atualizarLojaProduto(PDO $conexao, int $loja_id, int $produto_id, int $
     $consulta->bindValue(":produto_id", $produto_id);
     $consulta->execute();
 }
+                                      
